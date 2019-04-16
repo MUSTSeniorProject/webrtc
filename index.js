@@ -34,8 +34,9 @@ app.post('/pusher/auth', (req, res) => {
         const auth = pusher.authenticate(socketId, channel, presenceData);
         res.send(auth);
 });
+const port=process.env.PORT || 3000
 
 //listen on the app
-app.listen(3000, () => {
-    return console.log('Server is up on 3000')
+app.listen(port, () => {
+    return console.log('Server is up on '+port);
 });
