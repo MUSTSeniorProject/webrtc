@@ -77,9 +77,11 @@
     function prepareCaller(){
         //Initializing a peer connection
         caller = new window.RTCPeerConnection({'iceServers': [
-            {
-              'urls': 'stun:stun.l.google.com:19302'
-            },
+            'stun:stun.l.google.com:19302',
+            'stun:stun.l.google.com:19302',
+            'stun:stun1.l.google.com:19302',
+            'stun:stun2.l.google.com:19302',
+            'stun:stun.l.google.com:19302?transport=udp',
             {
               'urls': 'turn:192.158.29.39:3478?transport=udp',
               'credential': 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
@@ -90,9 +92,7 @@
               'credential': 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
               'username': '28224511:1379330808'
             },
-            {
-              'urls':'turn:turn02.hubl.in?transport=tcp'
-            }
+            'urls':'turn:turn02.hubl.in?transport=tcp',
           ]
         });
         //Listen for ICE Candidates and send them to remote peers
