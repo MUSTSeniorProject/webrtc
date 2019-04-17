@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 });
 
 // get authentictation for the channel;
-app.post('/', (req, res) => {
+app.post('/pusher/auth', (req, res) => {
         const socketId = req.body.socket_id;
         const channel = req.body.channel_name;
         var presenceData = {
