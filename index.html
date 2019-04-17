@@ -76,7 +76,9 @@
     prepareCaller();
     function prepareCaller(){
         //Initializing a peer connection
-        caller = new window.RTCPeerConnection();
+        caller = new window.RTCPeerConnection({
+            "iceServers": [{ "url": "stun:stun.l.google.com:19302" }]
+        });
         //Listen for ICE Candidates and send them to remote peers
         caller.onicecandidate = function(evt) {
             if (!evt.candidate) return;
@@ -90,7 +92,7 @@
         };
     }
     function getCam() {
-        //Get local audio/video feed and show it in selfview video element 
+        //Get local audio/video feed and show it in selfview video element
         return navigator.mediaDevices.getUserMedia({
             video: true,
             audio: true
@@ -120,9 +122,9 @@
     function callUser(user) {
         getCam()
             .then(stream => {
-                
+
                     document.getElementById("selfview").srcObject = stream;
-                
+
                 toggleEndCallButton();
                 caller.addStream(stream);
                 localUserMedia = stream;
@@ -152,7 +154,7 @@
     }
 
     function endCurrentCall(){
-        
+
         channel.trigger("client-endcall", {
                 "room": room
             });
@@ -191,7 +193,7 @@
     //Listening for Session Description Protocol message with session details from remote peer
     channel.bind("client-sdp", function(msg) {
         if(msg.room == id){
-            
+
             console.log("sdp received");
             var answer = confirm("You have a call from: "+ msg.from + "Would you like to answer?");
             if(!answer){
@@ -219,7 +221,7 @@
                     console.log('an error occured', error);
                 })
         }
-        
+
 
     });
 
@@ -229,7 +231,7 @@
             console.log("answer received");
             caller.setRemoteDescription(new RTCSessionDescription(answer.sdp));
         }
-        
+
     });
 
     channel.bind("client-reject", function(answer) {
@@ -238,19 +240,19 @@
             alert("call to " + answer.rejected + "was politely declined");
             endCall();
         }
-        
+
     });
 
      channel.bind("client-endcall", function(answer) {
         if(answer.room==room){
             console.log("Call Ended");
             endCall();
-            
+
         }
-        
+
     });
 
-    
+
 </script>
 <style>
     video {
@@ -266,11 +268,11 @@
         -ms-transition: all 1s ease-in-out;
         transition: all 1s ease-in-out;
     }
-    
+
     #list ul {
         list-style: none;
     }
-    
+
     #list ul li {
         font-family: Georgia, serif, Times;
         font-size: 18px;
@@ -284,7 +286,7 @@
         text-decoration: none;
         color: #bfe1f1;
     }
-    
+
     #list ul li:hover {
         -moz-transform: rotate(-5deg);
         -moz-box-shadow: 10px 10px 20px #000000;
