@@ -78,12 +78,12 @@
         //Initializing a peer connection
         caller = new window.RTCPeerConnection({'iceServers': [
             {
-              'url':'stun:stun.l.google.com:19302'
+            	urls: ['turn:numb.viagenie.ca'],
+            	credential: '62380A',
+            	username: 'seniorprojectmust@gmail.com'
             },
             {
-            	'url': 'turn:numb.viagenie.ca',
-            	'credential': '62380A',
-            	'username': 'seniorprojectmust@gmail.com'
+              urls:'stun:stun.l.google.com:19302'
             }
           ]
         });
