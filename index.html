@@ -141,7 +141,7 @@
                 toggleEndCallButton();
                 caller.addStream(stream);
                 localUserMedia = stream;
-                caller.createOffer().then(function(desc) {
+                caller.createOffer({iceRestart: true}).then(function(desc) {
                     caller.setLocalDescription(new RTCSessionDescription(desc));
                     channel.trigger("client-sdp", {
                         "sdp": desc,
