@@ -88,7 +88,7 @@
                           ]
                       }]
                     };
-        caller = new window.RTCPeerConnection(configuration);
+        caller = new RTCPeerConnection(configuration);
         //Listen for ICE Candidates and send them to remote peers
         caller.onicecandidate = function(evt) {
             if (!evt.candidate) return;
