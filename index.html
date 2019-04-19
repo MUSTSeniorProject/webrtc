@@ -76,7 +76,7 @@
     prepareCaller();
     function prepareCaller(){
         //Initializing a peer connection
-        var configuration = { iceServers: [{
+        let configuration = { iceServers: [{
                           urls: ["turn:homeo@turn.bistri.com:80"],
                           username: "homeo",
                           credential: "homeo"
@@ -87,7 +87,7 @@
                       }]
                     };
         caller = new window.RTCPeerConnection();
-        caller.setConfiguration(configuration);
+        caller.setConfiguration(configuration['iceServers']);
         //Listen for ICE Candidates and send them to remote peers
         caller.onicecandidate = function(evt) {
             if (!evt.candidate) return;
