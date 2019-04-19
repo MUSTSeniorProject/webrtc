@@ -76,10 +76,10 @@
     prepareCaller();
     function prepareCaller(){
         //Initializing a peer connection
-        caller = new window.RTCPeerConnection({'iceServers': [
+        caller = new window.RTCPeerConnection(
             { url: 'stun:stun.l.google.com:19302' },
             { url: 'turn:homeo@turn.bistri.com:80', credential: 'homeo', username: 'homeo' }
-        ]});
+        });
         //stun:74.125.140.127:19302, stun:[2a00:1450:400c:c08::7f]:19302,
         //turn:74.125.140.127:19305?transport=udp, turn:[2a00:1450:400c:c08::7f]:19305?transport=udp,
         //turn:74.125.140.127:19305?transport=tcp, turn:[2a00:1450:400c:c08::7f]:19305?transport=tcp]
