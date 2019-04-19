@@ -77,19 +77,18 @@
     function prepareCaller(){
         //Initializing a peer connection
         var configuration = { iceServers: [{
-                          urls: "turn:homeo@turn.bistri.com:80",
+                          urls: ["turn:homeo@turn.bistri.com:80"],
                           username: "homeo",
                           credential: "homeo"
                       }, {
                           urls: [
                                   "stun:stun.l.google.com:19302",
+                                  "stun:74.125.140.127:19302",
+                                  "stun:[2a00:1450:400c:c08::7f]:19302"
                           ]
                       }]
                     };
         caller = new window.RTCPeerConnection(configuration);
-        //stun:74.125.140.127:19302, stun:[2a00:1450:400c:c08::7f]:19302,
-        //turn:74.125.140.127:19305?transport=udp, turn:[2a00:1450:400c:c08::7f]:19305?transport=udp,
-        //turn:74.125.140.127:19305?transport=tcp, turn:[2a00:1450:400c:c08::7f]:19305?transport=tcp]
         //Listen for ICE Candidates and send them to remote peers
         caller.onicecandidate = function(evt) {
             if (!evt.candidate) return;
