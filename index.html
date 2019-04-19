@@ -87,7 +87,6 @@
                           ]
                       }]
                     });
-        caller.setConfiguration(configuration['iceServers']);
         //Listen for ICE Candidates and send them to remote peers
         caller.onicecandidate = function(evt) {
             if (!evt.candidate) return;
